@@ -17,7 +17,7 @@ class CompanyFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->unique()->name(),
+            'name' => $this->faker->unique()->company(),
             'address'=> $this->faker->streetAddress(),
             'city' => $this->faker->city(),
             'country' => $this->faker->country(),

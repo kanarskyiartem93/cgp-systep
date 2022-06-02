@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\ClientController;
+use App\Http\Controllers\Admin\CompanyController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +16,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], function () {
+
+    Route::resource('clients', ClientController::class, [
+        'names' => 'client'
+    ])->except([
+        'show'
+    ]);
+
+    Route::resource('companies', CompanyController::class, [
+        'names' => 'company'
+    ])->except([
+        'show'
+    ]);
+
 });
+
+
+Auth::routes();
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index']);
+

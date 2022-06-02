@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('address');
             $table->string('city');
             $table->string('country');
-            $table->unsignedInteger('phone');
+            $table->string('phone');
             $table->timestamps();
         });
     }
